@@ -1,6 +1,6 @@
 from test import *
 
-session = criar_conecao('''sqlite:///db1.db ''')
+session = criar_conexao('''sqlite:///db1.db ''')
 
 user = User(name = 'Filipe',password = '0482787034')
 tabela = User

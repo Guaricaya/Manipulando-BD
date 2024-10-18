@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 
 
-def criar_conecao(bd_link:str):
+def criar_conexao(bd_link:str):
     engine = create_engine(bd_link, echo=True)
     Session = sessionmaker(bind=engine)
     
