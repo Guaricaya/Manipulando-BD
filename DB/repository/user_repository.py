@@ -6,8 +6,12 @@ from ..entities.User import User
 class UserRespository:
     def create_user(self,user:User)->None:
         with DBConnectionHandler() as DB:
-            DB.session.add(user)
-            DB.session.commit()
+            try:
+                DB.session.add(user)
+                DB.session.commit()
+            except Exception as e:
+                DB.session.rollback()
+                raise e
 
     def read_user(self, tabela):
         with DBConnectionHandler() as DB:
@@ -21,15 +25,23 @@ class UserRespository:
         
     def delete_user_by_name(self, name_list:list)->None:
         with DBConnectionHandler() as DB:
-            for name in name_list:
-                DB.session.query(User).filter(User.name == name).delete()
-            DB.session.commit()
+            try:
+                for name in name_list:
+                    DB.session.query(User).filter(User.name == name).delete()
+                DB.session.commit()
+            except Exception as e:
+                DB.session.rollback()
+                raise e
 
     def update_user(self, name, senha):
         
         with DBConnectionHandler() as DB:
-            DB.session.query(User).filter(User.name == name).update({'passward':senha})
-            DB.session.commit()
+            try:
+                DB.session.query(User).filter(User.name == name).update({'passward':senha})
+                DB.session.commit()
+            except Exception as e:
+                DB.session.rollback()
+                raise e
 
     '''def delete_all_user(self, user):
         with DBConnectionHandler() as DB:
