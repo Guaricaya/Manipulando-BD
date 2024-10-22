@@ -1,13 +1,9 @@
-from test import *
+#exemplo de como funciona.
 
-session = criar_conexao('''sqlite:///db1.db ''')
+from DB.repository.user_repository import UserRespository
 
-user = User(name = 'Filipe',password = '0482787034')
-tabela = User
-consulta = session.execute('''Select *
-                From User''')
-for row in consulta:
-    print(row)
-#create_user(session, user)
-#user1 = read_user(session, tabela)[1]
-#print(user1.password)
+
+repo = UserRespository()
+repo.delete_user_by_name(['Filipe'])
+data = repo.read_user_all()
+print(data)
